@@ -1,23 +1,30 @@
+package init;
+
+import init.field;
+import pieces.pawn;
+import pieces.piece;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeListener;
 
 public class GUI{
 
     private final JPanel gui = new JPanel(new BorderLayout(3, 3));
-    private field[][] board = new field[8][8];
+    public static field[][] board = new field[8][8];
     private JPanel chessBoard;
+    private boolean buttonClicked = false;
 
     GUI() {
         initializeGui();
     }
 
     public final void initializeGui() {
-        // set up the main GUI
+        // set up the init.main init.GUI
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         chessBoard = new JPanel(new GridLayout(8, 8));
@@ -39,12 +46,10 @@ public class GUI{
                         //) {
                         || (j % 2 == 0 && i % 2 == 0)) {
                     b.setBackground(Color.WHITE);
-                    field f = new field(b, false);
-                    board[i][j] = f;
+                    board[i][j] = new field(b, false, i, j);
                 } else {
                     b.setBackground(Color.BLACK);
-                    field f = new field(b, true);
-                    board[i][j] = f;
+                    board[i][j] = new field(b, true, i, j);
                 }
 
             }
@@ -54,6 +59,7 @@ public class GUI{
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 chessBoard.add(board[i][j].getButton());
+                board[i][j].onClick();
             }
         }
 
@@ -75,8 +81,11 @@ public class GUI{
         for(int i = 0; i < 8; i++){
             if(i % 2 == 0){
                 board[6][i].getButton().setIcon(white);
+                board[6][i].setPiece(new pawn());
+
             }else{
                 board[6][i].getButton().setIcon(black);
+                board[6][i].setPiece(new pawn());
             }
         }
 

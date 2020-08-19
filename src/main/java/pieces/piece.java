@@ -1,5 +1,7 @@
 package pieces;
 
+import init.field;
+
 public interface piece {
-    public void move();
+    public boolean moveTo(int row, int column);
 }
