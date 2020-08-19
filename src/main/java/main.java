@@ -13,6 +13,7 @@ public class main{
                 f.add(gui.getGui());
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 f.setLocationByPlatform(true);
+                gui.putPawn();
 
                 // ensures the frame is the minimum size it needs to be
                 // in order display the components within it
